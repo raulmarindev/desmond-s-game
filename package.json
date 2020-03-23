@@ -13,11 +13,15 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "scripts": { 
-    "build": "webpack", 
-    "dev": "webpack-dev-server" 
-  },
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server",
+    "start": "node server.js",
+    "heroku-postbuild": "webpack -p"
+   },
   "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "phaser": "^3.22.0"
   }
 }
