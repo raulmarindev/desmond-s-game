@@ -6,7 +6,9 @@
   "author": "Raúl Marín",
   "license": "MIT",
   "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
+    "html-webpack-plugin": "^4.0.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
     "webpack": "^4.42.0",
@@ -14,14 +16,15 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack.dev.js",
     "dev": "webpack-dev-server",
     "start": "node server.js",
-    "heroku-postbuild": "webpack -p"
-   },
+    "heroku-postbuild": "webpack --config webpack.prod.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "path": "^0.12.7",
-    "phaser": "^3.22.0"
+    "phaser": "^3.22.0",
+    "webpack-merge": "^4.2.2"
   }
 }
