@@ -57,12 +57,22 @@ export class GameScene extends Phaser.Scene {
     };
 
     private eatSausage = (character: Phaser.GameObjects.GameObject, sausage: Phaser.GameObjects.GameObject) => {
-        sausage.destroy();
-        this.updateScore(10);
-        this.meow?.play();
+        if (sausage.active) {
+            this.sausages?.killAndHide(sausage);
+            this.updateScore(10);
+            this.meow?.play();
 
-        if (this.sausages?.countActive(true) === 0) {
-            this.addBombs();
+            if (this.sausages?.countActive(true) === 0) {
+                this.sausages.children.iterate(s => {
+                    const body = s.body as Phaser.Physics.Arcade.Body;
+                    body.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+                    s.setActive(true);
+                });
+
+                this.sausages.setXY(12, 0, 70);
+                this.sausages?.setVisible(true);
+                this.addBombs();
+            }
         }
     };
 
@@ -80,6 +90,9 @@ export class GameScene extends Phaser.Scene {
     }
 
     public update() {
+        if (this.gameOver)
+            return;
+
         this.pollControls();
     }
 
@@ -94,8 +107,8 @@ export class GameScene extends Phaser.Scene {
             setXY: { x: 12, y: 0, stepX: 70 }
         });
 
-        this.sausages.children.iterate(child => {
-            const body = child.body as Phaser.Physics.Arcade.Body;
+        this.sausages.children.iterate(s => {
+            const body = s.body as Phaser.Physics.Arcade.Body;
             body.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
         });
     };
