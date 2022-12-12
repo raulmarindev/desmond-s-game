@@ -22,7 +22,7 @@
     "heroku-postbuild": "webpack --config webpack.prod.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "path": "^0.12.7",
     "phaser": "^3.22.0",
     "webpack-merge": "^4.2.2"
